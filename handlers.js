@@ -6,12 +6,16 @@ const states = {
 const skillName = 'Test App:';
 
 // Message when the skill is first called
-const welcomeMessage =
-  'You can ask for the events today. Search for events by date. or say help. What would you like? ';
+const welcomeMessage = 'You can ask for the facts today. ';
 
 // Message for help intent
-const HelpMessage =
-  'Here are some things you can say: Is there an event today? Is there an event on the 18th of July? What are the events next week? Are there any events tomorrow?  What would you like to know?';
+const HelpMessage = `Here are some things you can say: 
+    Tell me a fact,
+    Tell me a space fact,
+    Give me a fact,
+    Give me a space fact,
+    Tell me trivia,
+  `;
 
 const newSessionHandlers = {
   LaunchRequest() {
@@ -19,7 +23,7 @@ const newSessionHandlers = {
     this.emit(':ask', skillName + ' ' + welcomeMessage, welcomeMessage);
   },
   Unhandled() {
-    this.emit(':ask', HelpMessage, HelpMessage);
+    this.emit(':tell', HelpMessage, HelpMessage);
   }
 };
 
