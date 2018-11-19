@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/alexa', function(req, res) {
-  console.log('Request from alexa ');
+  console.log('Request from alexa ', req.body);
   // Build the context manually, because Amazon Lambda is missing
   var context = {
     succeed: function(result) {
@@ -29,7 +29,7 @@ app.post('/alexa', function(req, res) {
     }
   };
   // Delegate the request to the Alexa SDK and the declared intent-handlers
-  var alexa = Alexa.handler(req.body, context);
+  const alexa = Alexa.handler(req.body, context);
   alexa.registerHandlers(handlers);
   alexa.execute();
 });
