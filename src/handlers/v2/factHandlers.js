@@ -1,8 +1,3 @@
-/* eslint-disable  func-names */
-/* eslint-disable  no-console */
-
-const Alexa = require('ask-sdk');
-
 const GetNewFactHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -16,11 +11,12 @@ const GetNewFactHandler = {
     const factArr = data;
     const factIndex = Math.floor(Math.random() * factArr.length);
     const randomFact = factArr[factIndex];
-    const speechOutput = LAUNCH_MESSAGE;
+    const speechOutput = LAUNCH_MESSAGE + GET_FACT_MESSAGE + randomFact;
 
     return handlerInput.responseBuilder
       .speak(speechOutput)
       .withSimpleCard(SKILL_NAME, randomFact)
+      .withShouldEndSession(false)
       .getResponse();
   }
 };
@@ -36,21 +32,6 @@ const HelpHandler = {
   handle(handlerInput) {
     return handlerInput.responseBuilder
       .speak(HELP_MESSAGE)
-      .reprompt(HELP_REPROMPT)
-      .getResponse();
-  }
-};
-
-const BookATeeTimeHandler = {
-  canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    return (
-      request.type === 'IntentRequest' && request.intent.name === 'BookATeeTime'
-    );
-  },
-  handle(handlerInput) {
-    return handlerInput.responseBuilder
-      .speak(BOOK_START)
       .reprompt(HELP_REPROMPT)
       .getResponse();
   }
@@ -101,7 +82,7 @@ const ErrorHandler = {
 };
 
 const SKILL_NAME = 'Space Facts';
-const LAUNCH_MESSAGE = "Hi! This is Fact App. Here's your fact: ";
+const LAUNCH_MESSAGE = 'Hi! This is Fact App.';
 const GET_FACT_MESSAGE = "Here's your fact: ";
 const HELP_MESSAGE =
   'You can say tell me a space fact, or, you can say exit... What can I help you with?';
@@ -126,15 +107,10 @@ const data = [
   'The Moon is moving approximately 3.8 cm away from our planet every year.'
 ];
 
-const skillBuilder = Alexa.SkillBuilders.custom();
-
-module.exports = skillBuilder
-  .addRequestHandlers(
-    GetNewFactHandler,
-    HelpHandler,
-    ExitHandler,
-    SessionEndedRequestHandler,
-    BookATeeTimeHandler
-  )
-  .addErrorHandlers(ErrorHandler)
-  .create();
+module.exports = {
+  GetNewFactHandler,
+  HelpHandler,
+  ExitHandler,
+  SessionEndedRequestHandler,
+  ErrorHandler
+};

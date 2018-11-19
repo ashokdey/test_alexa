@@ -19,10 +19,14 @@
   "dependencies": {
     "alexa-sdk": "^1.0.25",
     "ask-sdk": "^2.3.0",
+    "ask-sdk-core": "^2.3.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "nodemon": "^1.18.6"
   }
 }

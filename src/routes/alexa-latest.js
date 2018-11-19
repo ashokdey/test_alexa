@@ -1,16 +1,17 @@
 const alexaRoute = require('express').Router();
 // Set-Up Alexa Skill and it's handlers
-const { v2: skillBuilderInstance } = require('../handlers');
+const skillBuilderInstance = require('../handlers/v2/index');
 
 alexaRoute.post('/alexa/v2', function(req, res) {
+  console.table(req.body);
   skillBuilderInstance
     .invoke(req.body)
     .then(function(responseBody) {
-      res.json(responseBody);
+      return res.json(responseBody);
     })
     .catch(function(error) {
       console.log(error);
-      res.status(500).send('Error during the request');
+      return res.status(500).send('Error during the request');
     });
 });
 
