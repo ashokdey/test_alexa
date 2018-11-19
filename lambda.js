@@ -129,7 +129,7 @@ const data = [
 
 const skillBuilder = Alexa.SkillBuilders.standard();
 
-exports.handler = skillBuilder
+module.exports = skillBuilder
   .addRequestHandlers(
     GetNewFactHandler,
     HelpHandler,
@@ -137,5 +137,4 @@ exports.handler = skillBuilder
     SessionEndedRequestHandler,
     BookATeeTimeHandler
   )
-  .addErrorHandlers(ErrorHandler)
-  .lambda();
+  .addErrorHandlers(ErrorHandler);

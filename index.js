@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 4545;
 
+const handlers = require('./lambda');
+
 app.use(bodyParser.json());
 
 // Initialize the Alexa SDK
