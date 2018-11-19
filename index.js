@@ -3,12 +3,15 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 4545;
 
-const handlers = require('./lambda');
+const lambdaHandlers = require('./lambda');
+const handlers = require('./handlers');
 
 app.use(bodyParser.json());
 
 // Initialize the Alexa SDK
 const Alexa = require('alexa-sdk');
+
+console.log('appId: ', process.env.APP_ID);
 
 app.get('/', (req, res) => {
   res.jsonp({
@@ -31,6 +34,7 @@ app.post('/alexa', function(req, res) {
   // Delegate the request to the Alexa SDK and the declared intent-handlers
   const alexa = Alexa.handler(req.body, context);
   alexa.registerHandlers(handlers);
+  alexa.appId = process.env.APP_ID;
   alexa.execute();
 });
 
