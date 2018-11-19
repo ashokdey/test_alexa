@@ -101,8 +101,7 @@ const ErrorHandler = {
 };
 
 const SKILL_NAME = 'Space Facts';
-const LAUNCH_MESSAGE =
-  'Hi! This is Supreme Golf, the largest tee time marketplace in the world. I can book a tee time for you. When would you like to play?';
+const LAUNCH_MESSAGE = "Hi! This is Fact App. Here's your fact: ";
 const GET_FACT_MESSAGE = "Here's your fact: ";
 const HELP_MESSAGE =
   'You can say tell me a space fact, or, you can say exit... What can I help you with?';
