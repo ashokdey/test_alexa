@@ -127,7 +127,7 @@ const data = [
   'The Moon is moving approximately 3.8 cm away from our planet every year.'
 ];
 
-const skillBuilder = Alexa.SkillBuilders.standard();
+const skillBuilder = Alexa.SkillBuilders.custom();
 
 module.exports = skillBuilder
   .addRequestHandlers(
@@ -137,4 +137,5 @@ module.exports = skillBuilder
     SessionEndedRequestHandler,
     BookATeeTimeHandler
   )
-  .addErrorHandlers(ErrorHandler);
+  .addErrorHandlers(ErrorHandler)
+  .create();

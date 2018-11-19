@@ -1,20 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const Alexa = require('alexa-sdk');
+
+// Initialize the express app
 const app = express();
+app.use(bodyParser.json());
+// TODO: alexa-verifier
 const PORT = process.env.PORT || 4545;
 
-const lambdaHandlers = require('./lambda');
 const handlers = require('./handlers');
-
-app.use(bodyParser.json());
-
-// Initialize the Alexa SDK
-const Alexa = require('alexa-sdk');
 
 console.log('appId: ', process.env.APP_ID);
 
 app.get('/', (req, res) => {
-  res.jsonp({
+  res.json({
     message: 'Testing alexa app'
   });
 });
