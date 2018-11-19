@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const PORT = process.env.PORT || 4545;
 
 app.use(bodyParser.json());
 
@@ -30,4 +31,4 @@ app.post('/alexa', function(req, res) {
   alexa.execute();
 });
 
-app.listen(4545, () => console.log(`app running at http://localhost:4545`));
+app.listen(PORT, () => console.log(`app running at http://localhost:${PORT}`));
