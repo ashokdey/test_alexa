@@ -18,8 +18,8 @@ app.use(alexaRoutes);
 // define root route
 app.get('/', (req, res) => {
   res.json({
-    message: 'Testing alexa app'
+    message: 'Testing alexa app',
   });
 });
 
-app.listen(PORT, () => console.log(`app running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.info(`app running at http://localhost:${PORT}`));

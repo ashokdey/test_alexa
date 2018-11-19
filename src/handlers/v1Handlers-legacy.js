@@ -1,6 +1,6 @@
 const states = {
   SEARCHMODE: '_SEARCHMODE',
-  DESCRIPTION: '_DESKMODE'
+  DESCRIPTION: '_DESKMODE',
 };
 
 const skillName = 'Test App:';
@@ -20,11 +20,11 @@ const HelpMessage = `Here are some things you can say:
 const newSessionHandlers = {
   LaunchRequest() {
     this.handler.state = states.SEARCHMODE;
-    this.emit(':ask', skillName + ' ' + welcomeMessage, welcomeMessage);
+    this.emit(':ask', `${skillName} ${welcomeMessage}`, welcomeMessage);
   },
   Unhandled() {
     this.emit(':tell', HelpMessage, HelpMessage);
-  }
+  },
 };
 
 module.exports = newSessionHandlers;
