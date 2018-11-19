@@ -1,6 +1,6 @@
 const alexaRoute = require('express').Router();
 // Set-Up Alexa Skill and it's handlers
-const skillBuilderInstance = require('../handlers');
+const { v2: skillBuilderInstance } = require('../handlers');
 
 alexaRoute.post('/alexa/v2', function(req, res) {
   skillBuilderInstance
