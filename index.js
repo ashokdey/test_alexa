@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/alexa', function(req, res) {
+  console.log('Request from alexa ');
   // Build the context manually, because Amazon Lambda is missing
   var context = {
     succeed: function(result) {
