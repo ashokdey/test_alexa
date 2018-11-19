@@ -13,6 +13,7 @@ const app = express();
 // inject middlewares
 app.use(bodyParser.json());
 app.use(alexaRoutes);
+// TODO: add alexa-verify middleware (was skipped for local postman development)
 
 // define root route
 app.get('/', (req, res) => {
