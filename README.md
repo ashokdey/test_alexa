@@ -14,13 +14,17 @@ Basically, you have to remove `.lambda()` with `.create()` inside `handlers(cont
 ### Instance of Alexa skill builder
 
 ```javascript
+const Alexa = require('ask-sdk');
+// import handlers
+const skillBuilder = Alexa.SkillBuilders.custom();
+
 module.exports = skillBuilder
   .addRequestHandlers(
     GetNewFactHandler,
     HelpHandler,
     ExitHandler,
     SessionEndedRequestHandler,
-    BookATeeTimeHandler
+    NameIntentHandler
   )
   .addErrorHandlers(ErrorHandler)
   .create();
@@ -62,19 +66,21 @@ const GetNewFactHandler = {
 
 ```javascript
 const alexaRoute = require('express').Router();
-const { v2: skillBuilderInstance } = require('../handlers');
+// Set-Up Alexa Skill and it's handlers
+const skillBuilderInstance = require('../handlers/v2/index');
 
-alexaRoute.post('/alexa/v2', function(req, res) {
+alexaRoute.post('/alexa/v2', (req, res) => {
+  console.table(req.body);
   skillBuilderInstance
     .invoke(req.body)
-    .then(function(responseBody) {
-      res.json(responseBody);
-    })
-    .catch(function(error) {
-      console.log(error);
-      res.status(500).send('Error during the request');
+    .then(responseBody => res.json(responseBody))
+    .catch(error => {
+      console.error(error);
+      return res.status(500).send('Error during the request');
     });
 });
+
+module.exports = alexaRoute;
 ```
 
 ## Repo Structure
