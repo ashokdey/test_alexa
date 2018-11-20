@@ -5,19 +5,13 @@ const NameIntent = {
   canHandle(handlerInput) {
     const { request } = handlerInput.requestEnvelope;
 
-    return (
-      request.type === 'IntentRequest' && request.intent.name === 'NameIntent'
-    );
+    return request.type === 'IntentRequest' && request.intent.name === 'NameIntent';
   },
   async handle(handlerInput) {
-    console.log('----------------HandlerInput-----------------------');
-    console.log(handlerInput);
-    console.log('---------------------------------------');
-    const {
-      requestEnvelope,
-      serviceClientFactory,
-      responseBuilder
-    } = handlerInput;
+    // console.log('----------------HandlerInput-----------------------');
+    // console.log(handlerInput);
+    // console.log('---------------------------------------');
+    const { requestEnvelope, serviceClientFactory, responseBuilder } = handlerInput;
 
     const consentToken = requestEnvelope.context.System.apiAccessToken;
     if (!consentToken) {
@@ -50,7 +44,7 @@ const NameIntent = {
       }
       throw error;
     }
-  }
+  },
 };
 
 module.exports = NameIntent;

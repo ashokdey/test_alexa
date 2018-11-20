@@ -1,15 +1,15 @@
 # REST API implementation for Alexa Skill
 
-The RESPT API implementation contains both the v1 (```alexa-sdk```) and v2 (```ask-sdk```). 
+The RESPT API implementation contains both the v1 (`alexa-sdk`) and v2 (`ask-sdk`).
 
 ## Migrate from AWS-Lambda to REST
 
-If you already have a ```aws-lambda``` code and you want to migrate it to your own express/etc server implementation then simply have a look into the following files:
+If you already have a `aws-lambda` code and you want to migrate it to your own express/etc server implementation then simply have a look into the following files:
 
-- ```src/handlers/v2handlers.js```
-- ```src/routes/alexa-v2-latest.js```
+- `src/handlers/v2handlers.js`
+- `src/routes/alexa-v2-latest.js`
 
-Basically, you have to remove ```.lambda()``` with ```.create()``` inside ```handlers(containg your aws-lambda code)``` and inside the route, you can invoke the ```skillBuilderInstance``` imported from ```/handlers``` with the ```req.body```. Have a look at the code snippet
+Basically, you have to remove `.lambda()` with `.create()` inside `handlers(containg your aws-lambda code)` and inside the route, you can invoke the `skillBuilderInstance` imported from `/handlers` with the `req.body`. Have a look at the code snippet
 
 ### Instance of Alexa skill builder
 
@@ -28,7 +28,7 @@ module.exports = skillBuilder
 
 ### Sample request handler
 
-```javascript 
+```javascript
 const GetNewFactHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -52,9 +52,15 @@ const GetNewFactHandler = {
 };
 ```
 
+### Notes:
+
+- By default, `ask-sdk` ends the session after you send response hence to avoid this add `.withShouldEndSession(false)` in the response chain [here](#Sample-request-handler)
+
+- If you want to use 3rd party services, add `.withApiClient(new Alexa.DefaultApiClient())` in the instance building chain for Alexa skill builder [here](#Instance-of-Alexa-skill-builder)
+
 ### Inside the route
 
-```javascript 
+```javascript
 const alexaRoute = require('express').Router();
 const { v2: skillBuilderInstance } = require('../handlers');
 
@@ -78,5 +84,3 @@ alexaRoute.post('/alexa/v2', function(req, res) {
   - **routes** : contains the routes for the app
 
 **src/server.js** is the entry point for the application
-
-
