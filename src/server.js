@@ -1,8 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 
+// Import environment variables
+dotenv.config();
 // custom imports
 const alexaRoutes = require('./routes');
+const logger = require('log4js').getLogger('app');
 
 // declare variables
 const PORT = process.env.PORT || 4545;
@@ -22,4 +26,4 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(PORT, () => console.info(`app running at http://localhost:${PORT}`));
+app.listen(PORT, () => logger.info(`app running at http://localhost:${PORT}`));
