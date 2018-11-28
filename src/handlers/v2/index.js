@@ -9,6 +9,7 @@ const {
   SessionEndedRequestHandler,
   ErrorHandler,
 } = require('./factHandlers');
+const { GetFirstEventHandler } = require('./quoteHandler');
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
@@ -19,6 +20,8 @@ module.exports = skillBuilder
     ExitHandler,
     SessionEndedRequestHandler,
     NameIntentHandler,
+  
+    GetFirstEventHandler,
   )
   .addErrorHandlers(ErrorHandler)
   .withApiClient(new Alexa.DefaultApiClient()) // for using device information
