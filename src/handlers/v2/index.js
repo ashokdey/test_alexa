@@ -1,24 +1,36 @@
 /* eslint-disable  func-names */
 /* eslint-disable  no-console */
 const Alexa = require('ask-sdk');
-const NameIntentHandler = require('./getNameIntent');
+// const NameIntentHandler = require('./getNameIntent');
+// const {
+//   GetNewFactHandler,
+//   HelpHandler,
+//   ExitHandler,
+//   SessionEndedRequestHandler,
+//   ErrorHandler,
+// } = require('./factHandlers');
+
 const {
-  GetNewFactHandler,
+  LaunchRequestHandler,
+  InProgressGolfTicketBookingHandler,
+  CompletedGolfTicketBookingHandler,
   HelpHandler,
-  ExitHandler,
-  SessionEndedRequestHandler,
+  CancelStopHandler,
+  SessionEndedHandler,
   ErrorHandler,
-} = require('./factHandlers');
+} = require('./playGolf');
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 module.exports = skillBuilder
   .addRequestHandlers(
-    GetNewFactHandler,
+    LaunchRequestHandler,
+    InProgressGolfTicketBookingHandler,
+    CompletedGolfTicketBookingHandler,
     HelpHandler,
-    ExitHandler,
-    SessionEndedRequestHandler,
-    NameIntentHandler,
+    CancelStopHandler,
+    SessionEndedHandler,
+    ErrorHandler,
   )
   .addErrorHandlers(ErrorHandler)
   .withApiClient(new Alexa.DefaultApiClient()) // for using device information
